@@ -22,6 +22,8 @@ async def get_repos(
         html_url=repo["html_url"],
         description=repo["description"],
         owner_login=repo["owner"]["login"],
-        owner_avatar_url=repo["owner"]["avatar_url"]
+        owner_avatar_url=repo["owner"]["avatar_url"],
+        pushed_at=repo.get("pushed_at"),
+        updated_at=repo.get("updated_at")
     ) for repo in repos
     ]
