@@ -3,7 +3,7 @@ from datetime import datetime
 
 class RepoResponse(BaseModel):
     id: int
-    name: str
+    full_name: str
     html_url: str
     description: str | None = None
     default_branch: str

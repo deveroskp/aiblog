@@ -1,5 +1,6 @@
 from backend.settings import AUTH_SETTINGS
 import httpx
+from fastapi import HTTPException
 
 class UserService:
     def __init__(self) -> None:
@@ -17,7 +18,7 @@ class UserService:
                 }
             )
             response_data: dict = response.json()
-            access_token = response_data.get("access_token", "")
+            
+            access_token = response_data.get("access_token")
         
             return access_token
-

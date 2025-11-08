@@ -1,7 +1,6 @@
 from fastapi import APIRouter
 from fastapi.responses import RedirectResponse
 from backend.app.users.services  import UserService
-from backend.app.users.schemas import RepoResponse
 from fastapi import Depends
 from typing import Annotated
 from backend.settings import AUTH_SETTINGS
