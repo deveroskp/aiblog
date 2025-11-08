@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useAppContext } from '../contexts/Appcontext';
+import { authApi } from '../api/auth';
 
 const Header: React.FC = () => {
     const { currentTab, setCurrentTab, isLoggedIn, setIsLoggedIn } = useAppContext();
@@ -15,8 +16,9 @@ const Header: React.FC = () => {
             if (setIsLoggedIn) {
                 setIsLoggedIn(false);
             }
+            localStorage.removeItem('access_token');
         } else {
-            setCurrentTab('login');
+            authApi.login();
         }
     };
 
@@ -27,7 +29,7 @@ const Header: React.FC = () => {
     ];
 
     return (
-        <AppBar position="absolute" elevation={0} sx={{ backgroundColor: '#262626', width: '100%' }}>
+        <AppBar position="absolute" elevation={0} sx={{ backgroundColor: '#262626', width: '100%', maxHeight: 64 }}>
             <Toolbar disableGutters sx={{ px: 2, minHeight: 56 }}>
                 {/* Left brand */}
                 <Typography
