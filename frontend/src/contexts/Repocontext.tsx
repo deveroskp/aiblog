@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 import type { RepoItem } from '../types/githubRepo';
 import type { CommitItem } from '../types/githubCommit';
 import type { PRItem } from '../types/githubPR';
@@ -129,27 +129,38 @@ export const RepoProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     };
 
+    const value = useMemo<RepoContextType>(() => ({
+        repos,
+        setRepos,
+        selectedRepo,
+        setSelectedRepo,
+        selectRepo,
+        selectedFeed,
+        setSelectedFeed,
+        commits,
+        setCommits,
+        pullRequests,
+        setPullRequests,
+        loading,
+        error,
+        fetchRepos,
+        fetchRepoCommits,
+        fetchRepoPullRequests,
+    }), [
+        repos,
+        selectedRepo,
+        selectedFeed,
+        commits,
+        pullRequests,
+        loading,
+        error,
+        fetchRepos,
+        fetchRepoCommits,
+        fetchRepoPullRequests,
+    ]);
+
     return (
-        <RepoContext.Provider
-            value={{
-                repos,
-                setRepos,
-                selectedRepo,
-                setSelectedRepo,
-                selectRepo,
-                selectedFeed,
-                setSelectedFeed,
-                commits,
-                setCommits,
-                pullRequests,
-                setPullRequests,
-                loading,
-                error,
-                fetchRepos,
-                fetchRepoCommits,
-                fetchRepoPullRequests
-            }}
-        >
+        <RepoContext.Provider value={value}>
             {children}
         </RepoContext.Provider>
     );

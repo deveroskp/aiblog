@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 
 interface AppContextType {
     currentTab: string;
@@ -13,8 +13,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const [currentTab, setCurrentTab] = useState<string>('github');
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
+    const value = useMemo(() => ({
+        currentTab,
+        setCurrentTab,
+        isLoggedIn,
+        setIsLoggedIn,
+    }), [currentTab, isLoggedIn]);
+
     return (
-        <AppContext.Provider value={{ currentTab, setCurrentTab, isLoggedIn, setIsLoggedIn }}>
+        <AppContext.Provider value={value}>
             {children}
         </AppContext.Provider>
     );
