@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
-import type { Post } from '../../api/posts';
+import type { Post, UpdatePostData } from '../../api/posts';
 import React from 'react';
 import { useUpdatePost } from '../../hooks/usePosts';
 import { useDeletePost } from '../../hooks/usePosts';
@@ -29,7 +29,11 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
     };
 
     const handleSaveEdit = (id: number) => {
-        updatePostMutation.mutate({ id, title: post.title, content: post.content });
+        const data: UpdatePostData = {
+            title: post.title,
+            content: post.content
+        };
+        updatePostMutation.mutate({ id, data });
     };
 
     const handleDeleteClick = (id: number) => {
